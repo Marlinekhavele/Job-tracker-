@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 
-from app.models.job_application import ApplicationStatus, JobApplication
+from app.models.job_application import ApplicationStatus
 from app.repositories.job_application_repository import JobApplicationRepository
 from app.schemas.job_application import (
     DashboardStats,
@@ -11,6 +11,17 @@ from app.schemas.job_application import (
 
 
 class JobApplicationService:
+    """
+    args:
+        repository: JobApplicationRepository - The repository instance for performing database operations related to job applications
+    methods:
+        create_application(payload: JobApplicationCreate) -> JobApplicationResponse - Creates a new job application and returns its details
+        get_application(application_id: int) -> JobApplicationResponse - Retrieves a job application by its ID, or raises a 404 error if not found
+        list_applications(status: ApplicationStatus | None, company: str | None, limit: int, offset: int) -> list[JobApplicationResponse] - Retrieves a list of job applications with optional filtering by status and company, and supports pagination
+        update_application(application_id: int, payload: JobApplicationUpdate) -> JobApplicationResponse - Updates an existing job application with the provided fields, or raises a 404 error if the application ID does not exist
+        delete_application(application_id: int) -> None - Deletes a job application by its ID, returning a 204 No Content status if successful or a 404 error if the application
+        
+    """
     def __init__(self, repository: JobApplicationRepository) -> None:
         self._repo = repository
 

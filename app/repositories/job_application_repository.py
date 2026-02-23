@@ -9,6 +9,19 @@ from app.schemas.job_application import JobApplicationCreate, JobApplicationUpda
 
 
 class JobApplicationRepository:
+    """
+    args:
+        db: AsyncSession - The asynchronous database session for performing CRUD operations on job applications
+    methods:
+        create(payload: JobApplicationCreate) -> JobApplication - Creates a new job application record in the database
+        get_by_id(application_id: int) -> JobApplication | None - Retrieves a job application by its ID, or returns None if not found
+        get_all(status: ApplicationStatus | None, company: str | None, limit: int, offset: int) -> Sequence[JobApplication] - Retrieves a list of job applications with optional filtering by status and company, and supports pagination
+        update(application_id: int, payload: JobApplicationUpdate) -> JobApplication | None - Updates an existing job application with the provided fields, or returns None if the application ID does not exist
+        delete(application_id: int) -> bool - Deletes a job application by its ID, returning True if deletion was successful or False if the application ID does not exist
+        count_by_status() -> dict[str, int] - Returns a dictionary with the count of job applications grouped by their status
+        get_follow_ups_due() -> int - Returns the count of job applications that have a follow-up date that is due (i.e., in the past) and are not in a final status (rejected, withdrawn, offer)
+        get_recent(limit: int) -> Sequence[JobApplication] - Retrieves the most recent job applications, limited by the specified number
+    """
     def __init__(self, db: AsyncSession) -> None:
         self._db = db
 

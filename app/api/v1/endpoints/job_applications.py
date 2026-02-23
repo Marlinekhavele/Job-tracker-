@@ -23,6 +23,12 @@ async def create_application(
     payload: JobApplicationCreate,
     service: JobApplicationService = Depends(get_job_application_service),
 ) -> JobApplicationResponse:
+    """
+    args:
+        payload: JobApplicationCreate - The details of the job application to create
+    returns:
+        JobApplicationResponse - The created job application with its assigned ID and timestamps
+    """
     return await service.create_application(payload)
 
 
@@ -38,6 +44,15 @@ async def list_applications(
     offset: int = Query(default=0, ge=0),
     service: JobApplicationService = Depends(get_job_application_service),
 ) -> list[JobApplicationResponse]:
+    """
+    args:
+        status: Optional[ApplicationStatus] - Filter applications by their status
+        company: Optional[str] - Filter applications by company name (case-insensitive substring match)
+        limit: int - Maximum number of applications to return (default 50, max 200)
+        offset: int - Number of applications to skip for pagination (default 0)
+    returns:
+        List[JobApplicationResponse] - A list of job applications matching the filters and pagination
+    """
     return await service.list_applications(
         status=status, company=company, limit=limit, offset=offset
     )
@@ -51,6 +66,12 @@ async def list_applications(
 async def get_dashboard(
     service: JobApplicationService = Depends(get_job_application_service),
 ) -> DashboardStats:
+    """
+    args:
+        None
+        returns:
+        DashboardStats - Aggregated statistics about the job applications, including total count and counts by status
+    """
     return await service.get_dashboard_stats()
 
 
@@ -63,6 +84,12 @@ async def get_application(
     application_id: int,
     service: JobApplicationService = Depends(get_job_application_service),
 ) -> JobApplicationResponse:
+    """
+    args:
+        application_id: int - The ID of the job application to retrieve
+    returns:
+        JobApplicationResponse - The job application with the specified ID, or a 404 error if not found
+    """
     return await service.get_application(application_id)
 
 
@@ -76,6 +103,13 @@ async def update_application(
     payload: JobApplicationUpdate,
     service: JobApplicationService = Depends(get_job_application_service),
 ) -> JobApplicationResponse:
+    """
+    args:
+        application_id: int - The ID of the job application to update
+        payload: JobApplicationUpdate - The fields to update for the job application
+    returns:
+        JobApplicationResponse - The updated job application, or a 404 error if the application ID does not exist
+    """
     return await service.update_application(application_id, payload)
 
 

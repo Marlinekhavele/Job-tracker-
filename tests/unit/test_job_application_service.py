@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock, MagicMock
 from fastapi import HTTPException
 
 from app.models.job_application import ApplicationStatus
-from app.schemas.job_application import JobApplicationCreate, JobApplicationUpdate, JobApplicationResponse
+from app.schemas.job_application import JobApplicationCreate, JobApplicationUpdate
 from app.services.job_application_service import JobApplicationService
 from datetime import datetime
 

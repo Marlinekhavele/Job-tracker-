@@ -1,6 +1,6 @@
 # 🎯 Job Application Tracker API
 
-A clean FastAPI backend to monitor your job applications — tracking status, follow-ups, and progress across every company you apply to.
+A clean FastAPI backend to monitor your job applications tracking status, follow-ups, and progress across every company you apply to.
 
 ## Project Structure
 
@@ -23,9 +23,7 @@ job_tracker/
 
 ```
 Router → Service → Repository → Database
-  ↑          ↑           ↑
-Schemas   Business     SQL
-(Pydantic)  Logic     Queries
+
 ```
 
 ## Setup
@@ -34,7 +32,8 @@ Schemas   Business     SQL
 # 1. Create virtualenv
 python -m venv .venv && source .venv/bin/activate
 
-# 2. Install dependencies
+# 2. Install dependencies |
+#uv sync 
 pip install -r requirements.txt
 
 # 3. Copy env file
@@ -121,14 +120,7 @@ curl http://localhost:8000/api/v1/applications/dashboard
 - **FastAPI** — async web framework
 - **SQLAlchemy 2.0** — async ORM
 - **Pydantic v2** — data validation
-- **SQLite / aiosqlite** — default DB (swap `DATABASE_URL` for PostgreSQL)
+- **SQLite / aiosqlite** — DB 
 - **Pytest + pytest-asyncio** — unit & integration tests
 
-## Switching to PostgreSQL
 
-In `.env`, set:
-```
-DATABASE_URL=postgresql+asyncpg://user:password@localhost/job_tracker
-```
-
-Then add `asyncpg` to requirements.txt.

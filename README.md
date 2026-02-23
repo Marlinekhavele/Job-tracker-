@@ -7,16 +7,25 @@ A clean FastAPI backend to monitor your job applications tracking status, follow
 ```
 job_tracker/
 ├── app/
-│   ├── api/v1/endpoints/    # Route handlers (thin layer, no logic)
-│   ├── core/                # Config, database, dependency injection
-│   ├── models/              # SQLAlchemy ORM models
-│   ├── repositories/        # Data access layer (DB queries only)
-│   ├── schemas/             # Pydantic request/response models
-│   ├── services/            # Business logic layer
-│   └── main.py              # FastAPI app + lifespan
-└── tests/
-    ├── unit/                # Service tests with mocked repo
-    └── integration/         # Full API tests with test DB
+│   ├── api/
+│   │   └── v1/
+│   │       └── endpoints/
+│   ├── core/
+│   ├── models/
+│   ├── repositories/
+│   ├── schemas/
+│   ├── services/
+│   └── main.py
+├── tests/
+│   ├── unit/
+│   └── integration/
+├── .env.example
+├── .gitignore
+├── pyproject.toml
+├── pytest.ini
+├── README.md
+├── requirements.txt
+└── job_tracker.egg-info/
 ```
 
 ## Layered Architecture
